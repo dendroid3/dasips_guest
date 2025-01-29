@@ -11,10 +11,8 @@
     };
     spinner();
     
-    
     // Initiate the wowjs
     new WOW().init();
-
 
     // Sticky Navbar
     $(window).scroll(function () {
@@ -39,7 +37,6 @@
         return false;
     });
 
-
     // Header carousel
     $(".header-carousel").owlCarousel({
         autoplay: true,
@@ -53,7 +50,6 @@
             '<i class="bi bi-chevron-right"></i>'
         ]
     });
-
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
