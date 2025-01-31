@@ -73,17 +73,17 @@
         </div>
         <!-- Navbar End -->
 
+        <!-- 404 Not Found Start -->
 
-        <!-- Header Start -->
         <div class="container-fluid header bg-white p-0">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Property List</h1> 
+                    <h1 id="property_title" class="display-5 animated fadeIn mb-4"></h1> 
                         <nav aria-label="breadcrumb animated fadeIn">
                         <ol class="breadcrumb text-uppercase">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">Property List</li>
+                            <li id="property_title_crumb" class="breadcrumb-item text-body active" aria-current="page"></li>
                         </ol>
                     </nav>
                 </div>
@@ -92,53 +92,17 @@
                 </div>
             </div>
         </div>
-        <!-- Header End -->
 
+        <!-- 404 Not Found End -->
 
-        <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-            <div class="container">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-6">
-                                <select
-                                    id="select_location"
-                                    class="form-select border-0 py-3"
-                                >
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <select
-                                    id="select_type"
-                                    class="form-select border-0 py-3"
-                                >
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button
-                            id="search_button"
-                            class="btn btn-dark border-0 w-100 py-3"
-                        >
-                            Search
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search End -->
-
-
-        <!-- Property List Start -->
+        <!-- Property View Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-0 gx-5 align-items-end">
                     <div class="col-lg-12">
-                        <div class="text-center mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <h1 class="mb-3">Property Listing</h1>
-                            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
+                        <div class="text-center mx-auto mb-5" data-wow-delay="0.1s">
+                            <h1 id="property_title_inner" class="mb-3"></h1>
+                            <p id="property_description"></p>
                         </div>
                     </div>
                 </div>
@@ -146,24 +110,38 @@
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
                             <div
-                                id="properties_list"
+                                id="property_view"
                                 class="row g-4"
                             >
-                                <!-- Property Cards WIll be appended here -->
-                            </div>
-                            <div
-                                id="pagination"
-                                class="col-12 text-center wow fadeInUp"
-                                data-wow-delay="0.1s"
-                            >
-                                <!--Pagination will be inserted here -->
+                                <!-- Property View WIll be appended here -->
+
+                                <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+                                    <div class="property-item rounded overflow-hidden">
+                                        <div class="position-relative text-center overflow-hidden">
+                                            <img id="main_image" class="img-fluid" src="${image.image_url}" alt="">
+                                        </div>
+                                        <div id="secondary_image_container" class="row g-4 justify-content-center text-center py-2 my-2">
+                                            <div class="col-lg-2 col-md-2">
+                                                <img class="img-fluid" src="img/property-2.jpg" alt="">
+                                            </div>
+                                        </div>
+                                      <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3">${price}</h5>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${location}</p>
+                                      </div>
+                                      <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>${bedrooms} Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>${bathrooms} Bath</small>
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Property List End -->
+        <!-- Property View End -->
 
 
         <!-- Call to Action Start -->
@@ -286,7 +264,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="js/populate-properties.js"></script>
+    <script src="js/populate-property.js"></script>
 </body>
 
 </html>
