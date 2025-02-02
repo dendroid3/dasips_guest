@@ -1,3 +1,5 @@
+const api_url = "http://localhost:8000";
+
 $(document).ready(function() {
   // Function to extract URL parameters
   function getParameterByName(name) {
@@ -15,19 +17,20 @@ $(document).ready(function() {
   if (propertyId) {
       // Make the API call
       $.ajax({
-          url: `http://localhost:8000/api/properties/view?property_id=${propertyId}`,
+          url: `${api_url}/api/properties/view?property_id=${propertyId}`,
           method: 'GET',
           success: function(response, status, xhr) {
               if (xhr.status === 200) {
                   // Assuming the API response is a JSON object with the required fields
                   let property = response;
+                  const image_url = property.image_url ? `${api_url}${property.image_url}` : "img/property-2.jpg";
 
                   // Build the HTML for the property view
                   let propertyHtml = `
                       <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
                           <div class="property-item rounded overflow-hidden">
                               <div class="position-relative text-center overflow-hidden">
-                                  <img id="main_image" class="img-fluid" src="img/property-2.jpg" alt="">
+                                  <img id="main_image" class="img-fluid" src="${image_url}" alt="">
                               </div>
                               <div id="secondary_image_container" class="row g-4 justify-content-center text-center py-2 my-2">`;
 
@@ -35,10 +38,12 @@ $(document).ready(function() {
                   // Check if property_images array exists in the response
                   if (property.property_images && property.property_images.length > 0) {
                       property.property_images.forEach(function(image) {
-                          propertyHtml += `
-                              <div class="col-lg-2 col-md-2">
-                                  <img class="img-fluid" src="img/property-2.jpg" alt="">
-                              </div>`;
+                        const image_url = property.image_url ? `${api_url}${image.image_url}` : "img/property-2.jpg";
+
+                        propertyHtml += `
+                            <div class="col-lg-2 col-md-2">
+                                <img class="img-fluid" src="${image_url}" alt="">
+                            </div>`;
                       });
                   } else {
                       propertyHtml += `<p>No secondary images available.</p>`;
@@ -49,6 +54,7 @@ $(document).ready(function() {
                               <div class="p-4 pb-0">
                                   <h5 class="text-primary mb-3">${property.price}</h5>
                                   <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${property.location}</p>
+                                  <p>${property.description}</p>
                               </div>
                               <div class="d-flex border-top">
                                   <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>${property.bedrooms} Bed</small>

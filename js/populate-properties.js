@@ -1,4 +1,6 @@
 // script.js
+const api_url = "http://localhost:8000";
+
 $(document).ready(function() {
   // Define a function to create the div HTML with dynamic content
   function createPropertyItem(property_id ,price, title, location, image_url, property_type, bedrooms, bathrooms) {
@@ -6,7 +8,7 @@ $(document).ready(function() {
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
         <div class="property-item rounded overflow-hidden">
           <div class="position-relative overflow-hidden">
-            <a href=""><img class="img-fluid" src="${image_url}" alt=""></a>
+            <div class="d-flex justify-content-center"><img class="img-fluid" src="${image_url}" alt=""></div>
             <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">Rental</div>
             <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">${property_type}</div>
           </div>
@@ -62,7 +64,7 @@ $(document).ready(function() {
   // Function to fetch properties from the API
   function fetchProperties(url) {
     $.ajax({
-      url: url || "http://localhost:8000/api/properties/get", // API endpoint
+      url: url || `${api_url}/api/properties/get`, // API endpoint
       method: "GET", // HTTP method
       dataType: "json", // Expected response type
       success: function(data) {
@@ -73,14 +75,15 @@ $(document).ready(function() {
         if (Array.isArray(data.data)) {
           // Loop through each property and append it to the #properties_list
           data.data.forEach(function(property) {
+            const image_url = property.image_url ? `${api_url}${property.image_url}` : "img/property-2.jpg";
+            console.log(image_url);
             $("#properties_list").append(
               createPropertyItem(
                 property.id,
                 property.price,
                 property.title,
                 property.location,
-                // property.image_url,
-                'img/property-2.jpg',
+                image_url,
                 property.property_type,
                 property.bedrooms,
                 property.bathrooms
@@ -104,7 +107,7 @@ $(document).ready(function() {
 
   function fetchLocationAndTypes() {
     $.ajax({
-      url: 'http://localhost:8000/api/properties/types_and_locations',
+      url: `${api_url}/api/properties/types_and_locations`,
       method: 'GET',
       success: function(response) {
           // Populate the location dropdown
@@ -161,7 +164,7 @@ $(document).ready(function() {
     if (selectedLocation === 'Location' || selectedType === 'Type') {
         alert('Please select a valid location and property type.');
     } else {
-        let url = `http://localhost:8000/api/properties/get?location=${selectedLocation}&property_type=${selectedType}`;
+        let url = `${api_url}/api/properties/get?location=${selectedLocation}&property_type=${selectedType}`;
         fetchProperties(url); // Fetch properties based on selected location and type
     }
   });

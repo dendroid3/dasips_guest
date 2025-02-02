@@ -6,7 +6,7 @@ $(document).ready(function() {
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
         <div class="property-item rounded overflow-hidden">
           <div class="position-relative overflow-hidden">
-            <a href=""><img class="img-fluid" src="${imageUrl}" alt=""></a>
+            <div class="d-flex justify-content-center"><img class="img-fluid" src="${imageUrl}" alt=""></div>
             <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
           </div>
           <div class="p-4 pb-0">
@@ -76,8 +76,7 @@ $(document).ready(function() {
                 land.title,
                 land.description,
                 land.location,
-                // land.image_url,
-                'img/property-2.jpg',
+                `localhost:8000/${land.image_url}`,
               )
             );
           });

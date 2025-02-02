@@ -37,6 +37,57 @@
         return false;
     });
 
+    // WhatsApp button
+    $('.whatsapp-button').click(function () {
+        window.open('https://wa.me/254746753874', '_blank');
+    });
+
+    // Call button
+    $('.call-button').click(function () {
+        window.open('tel:+254746753874', '_blank');
+    });
+
+    // Enable Subject field
+    $('#name').on('input', function () {
+        const name = $('#name').val();
+        if (name.length > 0) {
+            $('#subject').prop('disabled', false);
+        } else {
+            $('#subject').prop('disabled', true);
+        }
+    });
+
+    // Enable Message field
+    $('#subject').on('input', function () {
+        const subject = $('#subject').val();
+        if (subject.length > 0) {
+            $('#message').prop('disabled', false);
+        } else {
+            $('#message').prop('disabled', true);
+        }
+    });
+
+    // Enable Send button
+    $('#message').on('input', function () {
+        const message = $('#message').val();
+        if (message.length > 0) {
+            $('#contact-us-submit-button').prop('disabled', false);
+        } else {
+            $('#contact-us-submit-button').prop('disabled', true);
+        }
+    });
+
+    // Contact form
+    $('#contact-form').submit(function (e) {
+        const name = $('#name').val();
+        const subject = $('#subject').val();
+        const message = $('#message').val();
+        const whatsappMessage = `Hello, I am ${name}.\nI a write  to inquire on the subject of ${subject}\n\n${message}\n\nLooking forward to your reply.\n\nKind Regards.`;
+        const urlencodedText = encodeURIComponent(whatsappMessage);
+        window.open(`https://wa.me/254705715099?text=${urlencodedText}`, '_blank');
+
+    });
+
     // Header carousel
     $(".header-carousel").owlCarousel({
         autoplay: true,
